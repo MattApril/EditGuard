@@ -1,0 +1,4 @@
+EditGuard
+=========
+
+mediawiki extension
