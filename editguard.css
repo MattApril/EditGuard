@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+#EGBlanket {
+	position: absolute;
+	width: 100%;
+	min-height: 100%; /* real browsers */
+	height: auto !important; /* real browsers */
+	height: 100%; /* IE: treated as min-height */
+	top: 0px;
+	left: 0px;
+	font-size: 0px;
+	line-height: 0px;
+	z-index: 901;
+	background: #AAA;
+	opacity: 0.65;
+	filter: alpha(opacity=65);
+}
+
+/**
+ *
+ */
+#EGWarning {
+	position: absolute;
+	width: 75%;
+	min-width: 260px;
+	padding: 6px 16px 10px 16px;
+	background: #FFF;
+	z-index: 902;
+	border: 3px solid #F20;
+}
+
+#EGContact{
+	float: right;
+
+}
+
+.EGinline {
+	display: inline-block;
+	padding: 0px 4px 4px 0px;
+}
+.EGclear {
+	clear: both;
+}
+.EGcenter {
+	margin: 0 auto;
+	text-align: center;
+}

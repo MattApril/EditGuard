@@ -1,0 +1,85 @@
+<!--- 
+ **************************************************************
+ Usage instructions:
+ 1. REMOVE THE TAG line above this box
+    IT WILL PREVENT PROPER DISPLAY OF THE INFOBOX.
+
+ 2. Fill in the template.  For help, see [[Template:Extension]]
+ 3. Remove this comment when you no longer need it.
+ **************************************************************
+--->
+
+{{Extension|templatemode=
+|name          = EditGuard
+|status        = experimental
+|type1         = interface
+|hook1         = EditPage::showEditForm:initial
+|hook2         = EditPage::showEditForm:fields
+|username      = Matthew.JA
+|author        = Matthew April
+|description   = Checks to make sure session data has not been lost before submitting an edit form
+|image         =
+|imagesize     =
+|version       = 1.1
+|update        = 2011/07
+|mediawiki     = 1.15+
+|php           = 
+|license       =
+|download      = 
+|readme        =
+|changelog     =
+|parameters    = $egEnableContactUs
+|tags          =
+|rights        = <!-- user rights, for use with $wgGroupPermissions -->
+|example       =
+|compatibility = 
+}}
+
+==About==
+The sole purpose of [[EditGuard]] is to prevent users from losing an edit due to their session timing out (being automatically logged out).
+
+In the event that you do get logged out while editing a page, you will see a popup window prompting you to login again after you have pressed the ''Save'' button.  Once you log back in you can continue saving the page, or return to the edit window.
+
+==Usage==
+
+==Download instructions==
+<!-- revise these instructions if code is available via a download site -->
+Please cut and paste the code found [[#Code|below]] and place it in <code>$IP/extensions/ExtensionName/ExtensionName.php</code>.  ''Note: [[Manual:$IP|$IP]] stands for the root directory of your MediaWiki installation, the same directory that holds [[Manual:LocalSettings.php|LocalSettings.php]]''.
+
+==Installation==
+To install this extension, add the following to [[Manual:LocalSettings.php|LocalSettings.php]]:
+<source lang="php">
+#add configuration parameters here
+#setup user rights here
+require_once("$IP/extensions/ExtensionName/ExtensionName.php");
+</source>
+
+This extension requires the API to be enabled (which it is by default)
+
+===Configuration parameters===
+<!-- Explain the purpose of each configuration parameter provided to Template:Extension -->
+
+===User rights===
+<!-- Explain the purpose of each user right provided to Template:Extension -->
+
+==Code==
+<!-- delete this section if code is available via a download site -->
+<source lang="php">
+# put your code here
+# note that the ending ?> tag should not be present,
+# as it's not needed and is likely to cause only problems.
+# This has been since MediaWiki 1.11 and newer releases.
+</source>
+
+==Known Issues==
+
+EditGuard is not guarenteed to catch all timeouts due to a conflict with the way PHP's garbage collection works.  The time between a session expiring and it actually being removed by garbage collection creates a window for this extension to fail.  However, the chances are fairly low (less than 1%).
+
+If you are not interested in the technical details you can stop here. Everytime a session is started there is a chance (as defined in your servers configuration, default 1%) for garbage collection to be run.  One of the things garbage collection does is delete expired sessions.
+So, when a session expires, but garbage collection has not had a chance to run yet we can run into a problem. What sometimes happens (to my understanding),is EditGuard is called and checks the session, it see's that the session still exists, which allows the user to submit the form.  This is fine, except for cases where garbage collection is triggered on the users next request (the form submit), which will cause their own session to be cleaned up.  In turn they are logged out and slip right through the checks performed by EditGuard.
+
+If any developers have suggestions or solutions to this problem please feel free to contact me.
+
+
+==See also==
+<!-- add other related extensions here, if applicable. If not, just delete this comment and the see also-header. -->

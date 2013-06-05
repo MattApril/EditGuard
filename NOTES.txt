@@ -1,0 +1,73 @@
+TODO
+---------------------
+X 1. Get editToken and update the page's token if they have been logged out/in again.
+	- sajax_do_call to get the token.
+	- js to update the hidden input value
+	
+X 2. Token security
+	X - check user
+	X - check that EditGaurd is being used
+	X - Error handling (?)
+	X - string Length
+
+X 4. Localize
+
+X 5. Pop-up window
+
+X 7. only use extension if client is using JS.*****
+
+X 8. Login error handling
+
+X 10. use sajax wherever possible. (initial check?)
+
+X 12. IE6+ Compatible
+
+13. Javascript function is slow to fire sometimes, usually
+after you have been inactive for a while.
+	- Figoure out why/solution
+
+15. works with vector? (CSS)
+
+X 16. add <noscript> warning below save button. (see #7)
+
+17. Multi user - same browser, testing
+
+18. Config variables?
+
+19. pre-commit Javascript 
+	- test all browsers (chrome, opera)
+	- validate
+	- DRY?
+
+20. production testing
+	- bureaucrats only?
+
+
+
+Process:
+-----------
+- click
+- checks session
+- if timeout - display popup
+	- dispaly login box - update token when login is finished
+	- save = submit edit form
+	- cancel = return to edit window (hide div)
+
+
+Potential Issues:
+--------------------
+- Syncro AJAX
+X - Saving pages now requires JS.
+- Token Security
+- SSL (will API take care of this?)
+- Not compatible/useful with anonymous wikis
+
+
+Notes
+----------
+- I Assume the API handles all escaping of login info, so i did not do it in my code.
+- The time between a session expiring, and it actually being deleted by garbage collection
+  creates a window for this extension to fail. This is very important for low volume servers.
+	- The higher the rate of garbage collection - the more effective this extension will be.
+- The server configuration (specifically dealing with cookies and sessions) will
+  greatly effect the way this extension works.
